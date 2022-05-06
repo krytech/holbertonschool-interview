@@ -61,7 +61,6 @@ heap_t *heap_insert(heap_t **root, int value)
 	height = tree_height_left(*root);
 	max_nodes = (1 << height) - 1;
 	node_array = (heap_t **)calloc(max_nodes, sizeof(heap_t *));
-
 	if (!node_array)
 		return (NULL);
 
@@ -85,6 +84,6 @@ heap_t *heap_insert(heap_t **root, int value)
 		insert = parent;
 		parent = parent->parent;
 	}
-	free (node_array);
+	free(node_array);
 	return (insert);
 }
