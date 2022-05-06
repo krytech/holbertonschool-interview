@@ -58,7 +58,7 @@ heap_t *heap_insert(heap_t **root, int value)
 		*root = insert;
 		return (insert);
 	}
-	height = get_left_height(*root);
+	height = tree_height_left(*root);
 	max_nodes = (1 << height) - 1;
 	node_array = (heap_t **)calloc(max_nodes, sizeof(heap_t *));
 
