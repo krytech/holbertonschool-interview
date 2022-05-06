@@ -85,5 +85,6 @@ heap_t *heap_insert(heap_t **root, int value)
 		insert = parent;
 		parent = parent->parent;
 	}
+	free (node_array);
 	return (insert);
 }
