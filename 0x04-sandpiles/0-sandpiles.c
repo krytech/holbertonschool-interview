@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 /**
- * stable - checks if the grid is stable, <4
+ * stable_check - checks if the grid is stable, <4
  * @grid: 3x3 grid
  * Return: 1 if stable, 0 if not
  */
@@ -29,18 +29,18 @@ int stable_check(int grid[3][3])
  */
 static void print_grid(int grid[3][3])
 {
-    int i, j;
+	int i, j;
 
-    for (i = 0; i < 3; i++)
-    {
-        for (j = 0; j < 3; j++)
-        {
-            if (j)
-                printf(" ");
-            printf("%d", grid[i][j]);
-        }
-        printf("\n");
-    }
+	for (i = 0; i < 3; i++)
+	{
+		for (j = 0; j < 3; j++)
+		{
+			if (j)
+				printf(" ");
+			printf("%d", grid[i][j]);
+		}
+		printf("\n");
+	}
 }
 
 /**
@@ -56,7 +56,6 @@ void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 		{0, 0, 0},
 		{0, 0, 0}
 	};
-
 	for (i = 0; i < 3; i++)
 	{
 		for (j = 0; j < 3; j++)
@@ -64,7 +63,6 @@ void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 			grid1[i][j] = grid1[i][j] + grid2[i][j];
 		}
 	}
-
 	while (!stable_check(grid1))
 	{
 		printf("=\n");
