@@ -2,35 +2,42 @@
 """script that reads stdin line by line and computes metrics"""
 import sys
 
-i = 0
-file_size = 0
-status_code = {"200": 0, "301": 0, "400": 0, "401": 0,
-                "403": 0, "404": 0, "405": 0, "500": 0}
 
-try:
-    for line in sys.stdin:
-        args = line.split(" ")
-        if len(args) > 2:
-            status_line = args[-2]
-            file_size = args[-1]
-            if status_line in status_code:
-                status_code[status_line] += 1
-            file_size += int(file_size)
-            i += 1
-            if i == 10:
-                print("File size: {:d}".format(file_size))
-                sorted_keys = sorted(status_code.keys())
-                for key in sorted_keys:
-                    value = status_code[key]
-                    if value != 0:
-                        print("{}: {}".format(key, value))
-                i = 0
-except Exception:
-    pass
-finally:
-    print("File size: {}".format(file_size))
-    sorted_keys = sorted(status_code.keys())
-    for key in sorted_keys:
-        value = status_code[key]
-        if value != 0:
+def print_it(size, status_code):
+    """print it"""
+    print("File size: {}".format(size))
+    for key, value in sorted(status_code.items()):
+        if (value != 0):
             print("{}: {}".format(key, value))
+
+
+if __name__ == '__main__':
+    """init code to print the parsed data"""
+    size = 0
+    i = 0
+    status_code = {
+        "200": 0,
+        "301": 0,
+        "400": 0,
+        "401": 0,
+        "403": 0,
+        "404": 0,
+        "405": 0,
+        "500": 0
+    }
+
+    try:
+        for line in sys.stdin:
+            i += 1
+            if (len(line.split()) < 2):
+                continue
+            code = line.split()[-2]
+            size += int(line.split()[-1])
+            if code in status_code:
+                status_code[code] += 1
+            if (i % 10 == 0):
+                print_it(size, status_code)
+        print_it(size, status_code)
+    except KeyboardInterrupt:
+        print_it(size, status_code)
+        raise
