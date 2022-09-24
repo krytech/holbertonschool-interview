@@ -89,6 +89,7 @@ int main(int counter, char **val)
 	if (val[1][0] == 48 || val[2][0] == 48)
 	{
 		_puts("0");
+		_putchar('\n');
 		exit(0);
 	}
 	while (num1[len1])
